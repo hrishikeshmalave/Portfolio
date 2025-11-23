@@ -3,753 +3,523 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hrishikesh Prasad Malave - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Hrishikesh Prasad Malave - DevOps/Cloud Engineer Portfolio</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for Colors */
+        /* Custom Tailwind Configuration and Base Styles */
         :root {
-            /* Light Mode Colors */
-            --bg-primary: #f0f2f5;
-            --bg-secondary: #f8f8f8;
-            --text-primary: #333;
-            --text-secondary: #2c3e50;
-            --card-bg: #ffffff;
-            --accent-blue: #3498db;
-            --accent-dark-blue: #2980b9;
-            --header-bg-start: #2563eb;
-            --header-bg-end: #4f46e5;
-            --skill-bg: #e0f2fe;
-            --skill-text: #1e40af;
-            --project-skill-bg: #d1fae5;
-            --project-skill-text: #065f46;
-            --footer-bg: #1f2937;
-            --header-link-color: #fff;
+            /* Define a custom blue for the accent color */
+            --color-custom-blue: #3498db;
         }
 
-        /* Dark Mode Colors */
-        body.dark-mode {
-            --bg-primary: #1a202c; /* Dark background */
-            --bg-secondary: #2d3748; /* Slightly lighter dark background */
-            --text-primary: #e2e8f0; /* Light text */
-            --text-secondary: #cbd5e0; /* Lighter text for headings */
-            --card-bg: #2d3748; /* Darker card background */
-            --accent-blue: #63b3ed; /* Lighter blue for dark mode */
-            --accent-dark-blue: #4299e1;
-            --header-bg-start: #1a202c;
-            --header-bg-end: #2d3748;
-            --skill-bg: #4a5568;
-            --skill-text: #e2e8f0;
-            --project-skill-bg: #48bb78;
-            --project-skill-text: #1a202c;
-            --footer-bg: #1a202c;
-            --header-link-color: #90cdf4;
-        }
-
-        /* General Body Styles */
+        /* Applying Inter font and general transitions */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        /* Container for content width */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.5rem;
+        /* Base colors for Light Mode */
+        .light-theme {
+            --color-bg-primary: #f8f9fa;
+            --color-bg-secondary: #ffffff;
+            --color-text-primary: #1f2937;
+            --color-text-secondary: #111827;
+            --color-accent: #2563eb;
+            --color-skill-bg: #e0f2fe;
+            --color-skill-text: #1e40af;
+            --color-project-skill-bg: #d1fae5;
+            --color-project-skill-text: #065f46;
         }
 
-        /* Section Title Styling */
-        .section-title {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            text-align: center;
-            position: relative;
-            padding-bottom: 0.5rem;
-            transition: color 0.3s ease;
+        /* Base colors for Dark Mode */
+        .dark-theme {
+            --color-bg-primary: #1a202c;
+            --color-bg-secondary: #2d3748;
+            --color-text-primary: #e2e8f0;
+            --color-text-secondary: #ffffff;
+            --color-accent: #63b3ed;
+            --color-skill-bg: #4a5568;
+            --color-skill-text: #e2e8f0;
+            --color-project-skill-bg: #48bb78;
+            --color-project-skill-text: #1a202c;
         }
 
+        /* Apply dynamic colors based on theme */
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+        }
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .bg-secondary { background-color: var(--color-bg-secondary); }
+
+        /* Custom style for the section title underline */
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -5px;
             left: 50%;
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background-color: var(--accent-blue);
+            background-color: var(--color-accent);
             border-radius: 9999px;
             transition: background-color 0.3s ease;
         }
 
-        /* Card Styling for sections and individual items */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        /* Dynamic skill tag colors */
+        .skill-item {
+            background-color: var(--color-skill-bg);
+            color: var(--color-skill-text);
         }
-
-        /* Icon Styling */
-        .icon {
-            display: inline-block;
-            width: 1.25rem;
-            height: 1.25rem;
-            vertical-align: middle;
-            margin-right: 0.5rem;
-            fill: currentColor; /* Ensures the SVG icon color changes with text color */
+        .project-skill-tag {
+            background-color: var(--color-project-skill-bg);
+            color: var(--color-project-skill-text);
         }
-
-        /* Link Styling */
-        a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            transition: color 0.3s ease;
+        
+        /* Set initial theme */
+        body {
+            @apply light-theme;
         }
-
-        a:hover {
-            color: var(--accent-dark-blue);
-            text-decoration: underline;
-        }
-
-        /* Header Specific Styles */
-        header {
-            background: linear-gradient(to right, var(--header-bg-start), var(--header-bg-end));
-            color: #fff;
-            padding: 3rem 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            text-align: center;
-            position: relative; /* For dark mode toggle positioning */
-            transition: background 0.3s ease;
-        }
-
-        header .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        header h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 1.5rem;
-        }
-
-        header .contact-info p {
-            font-size: 1.125rem;
-            margin-bottom: 0.5rem;
-            text-align: left;
-        }
-
-        header .contact-info a {
-            color: var(--header-link-color);
-            transition: color 0.3s ease;
-        }
-
-        header .contact-info a:hover {
-            color: #90cdf4; /* A lighter blue for hover in dark mode header */
-        }
-
-        /* Profile Image */
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1.5rem;
-            border: 4px solid var(--accent-blue);
-            box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.2);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Dark Mode Toggle Button */
-        .dark-mode-toggle {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border: none;
-            border-radius: 0.5rem;
-            padding: 0.75rem 1rem;
-            cursor: pointer;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .dark-mode-toggle:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .dark-mode-toggle svg {
-            width: 1.25rem;
-            height: 1.25rem;
-            fill: currentColor;
-        }
-
-        /* Skills Section Specific Styles */
-        #skills {
-            background-color: var(--bg-secondary);
-            padding: 4rem 0;
-        }
-        #skills .skill-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        #skills .skill-item {
-            background-color: var(--skill-bg);
-            color: var(--skill-text);
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 1rem;
-            font-weight: 500;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            white-space: nowrap;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* Projects Section Specific Styles */
-        #projects {
-            padding: 4rem 0;
-        }
-        #projects .project-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        #projects .project-card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-
-        #projects .project-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        #projects .project-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        #projects .project-card .date {
-            color: var(--text-primary);
-            font-size: 0.875rem;
-            margin-bottom: 0.75rem;
-            transition: color 0.3s ease;
-        }
-
-        #projects .project-card ul {
-            list-style: disc;
-            padding-left: 1.25rem;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            line-height: 1.5;
-            transition: color 0.3s ease;
-        }
-
-        #projects .project-card ul li {
-            margin-bottom: 0.25rem;
-        }
-
-        #projects .project-card .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        #projects .project-card .skill-tags span {
-            background-color: var(--project-skill-bg);
-            color: var(--project-skill-text);
-            font-size: 0.75rem;
-            padding: 0.25rem 0.625rem;
-            border-radius: 9999px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* Internship & Education Specific Styles (similar to project card) */
-        #internships {
-            background-color: var(--bg-secondary);
-            padding: 4rem 0;
-        }
-        #internships .internship-item,
-        #education .education-item {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-
-        #internships .internship-item:hover,
-        #education .education-item:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        #internships .internship-item h3,
-        #education .education-item h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 0.25rem;
-            transition: color 0.3s ease;
-        }
-
-        #internships .internship-item p,
-        #education .education-item p {
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-            transition: color 0.3s ease;
-        }
-
-        #internships .internship-item .date,
-        #education .education-item .date {
-            color: var(--text-primary);
-            font-size: 0.875rem;
-            margin-bottom: 0.75rem;
-            transition: color 0.3s ease;
-        }
-
-        #internships .internship-item ul {
-            list-style: disc;
-            padding-left: 1.25rem;
-            color: var(--text-primary);
-            line-height: 1.5;
-            transition: color 0.3s ease;
-        }
-
-        /* Certifications Specific Styles */
-        #certifications {
-            background-color: var(--bg-secondary);
-            padding: 4rem 0;
-        }
-        #certifications .certs-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        #certifications .cert-item {
-            background-color: var(--card-bg);
-            padding: 1.25rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-
-        #certifications .cert-item:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        #certifications .cert-item h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 0.25rem;
-            transition: color 0.3s ease;
-        }
-
-        #certifications .cert-item p {
-            color: var(--text-primary);
-            font-size: 0.875rem;
-            transition: color 0.3s ease;
-        }
-
-        /* Extra-curricular & Interests Specific Styles */
-        #extra-interests {
-            padding: 4rem 0;
-        }
-        #extra-interests .grid-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        #extra-interests .activity-card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-
-        #extra-interests .activity-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        #extra-interests .activity-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        #extra-interests .activity-card ul {
-            list-style: disc;
-            padding-left: 1.25rem;
-            color: var(--text-primary);
-            line-height: 1.5;
-            transition: color 0.3s ease;
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: var(--footer-bg);
-            color: #fff;
-            padding: 2rem 0;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-
-        footer p {
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-        }
-
-        /* Responsive Design - Media Queries */
-        @media (min-width: 768px) { /* md breakpoint */
-            header .container {
-                flex-direction: row;
-                text-align: left;
-            }
-
-            header .header-left {
-                display: flex;
-                align-items: center;
-                gap: 2rem;
-            }
-
-            header p {
-                margin-bottom: 0;
-            }
-
-            header .contact-info {
-                text-align: right;
-            }
-
-            #projects .project-grid,
-            #certifications .certs-grid,
-            #extra-interests .grid-layout {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
-            }
-        }
-
-        @media (min-width: 1024px) { /* lg breakpoint */
-            #projects .project-grid,
-            #certifications .certs-grid {
-                grid-template-columns: repeat(3, 1fr); /* 3 columns for large screens */
-            }
+        body.dark-mode {
+            @apply dark-theme;
         }
     </style>
 </head>
-<body>
+<body class="light-theme">
 
     <!-- Header Section -->
-    <header>
-        <div class="container">
-            <div class="header-left">
-                <!-- Professional Photograph Placeholder -->
-                <img src="passportsize.jpg" alt="Hrishikesh Prasad Malave" class="profile-image">
-                <div>
-                    <h1>Hrishikesh Prasad Malave</h1>
-                    <p>B.Tech. - Computer Science Engineering </p>
-                    <p>PCET's Nutan College of Engineering and Research</p>
+    <header class="bg-gradient-to-r from-blue-700 to-indigo-600 text-white p-6 shadow-xl relative transition duration-300">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 max-w-7xl">
+            
+            <div class="flex flex-col md:flex-row items-center space-x-6">
+                <!-- Profile Image Placeholder -->
+                <img src="https://placehold.co/150x150/2563eb/ffffff?text=HP" alt="Hrishikesh Prasad Malave" 
+                     class="w-36 h-36 rounded-full object-cover border-4 border-white shadow-lg transition duration-300 hover:scale-105">
+                
+                <div class="text-center md:text-left">
+                    <h1 class="text-5xl font-extrabold mb-1">Hrishikesh Prasad Malave</h1>
+                    <p class="text-2xl font-light opacity-90">DevOps & Cloud Engineer</p>
+                    <p class="text-lg font-medium opacity-80 mt-1">B.Tech. - Computer Science Engineering</p>
                 </div>
             </div>
-            <div class="contact-info">
-                <p><svg class="icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.956.71l1.25 4.298a1 1 0 01-.54 1.155l-1.745.723a1 1 0 00-.5.868v2.731a1 1 0 00.174.553l.067.098a1 1 0 00.868.5l2.731-.5a1 1 0 00.868.5l.723-1.745a1 1 0 011.155-.54l4.298 1.25a1 1 0 01.71.956V17a1 1 0 01-1 1h-2.153a1 1 0 01-.956-.71l-1.25-4.298a1 1 0 01.54-1.155l1.745-.723a1 1 0 00.5-.868v-2.731a1 1 0 00-.174-.553l-.067-.098a1 1 0 00-.868-.5l-2.731.5a1 1 0 00-.868.5l-.723 1.745a1 1 0 01-1.155.54l-4.298-1.25A1 1 0 013 3z"/></svg> +91-7264051212</p>
-                <p><svg class="icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg> <a href="hrishikeshmalave@gmail.com">hrishikeshmalave@gmail.com</a></p>
-                <p><svg class="icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16 4H4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2zm-1.5 6.5a.5.5 0 01-.5.5h-9a.5.5 0 01-.5-.5v-3a.5.5 0 01.5-.5h9a.5.5 0 01.5.5v3z" clip-rule="evenodd"/></svg> <a href="https://www.linkedin.com/in/hrishikesh-malave-890948169" target="_blank">LinkedIn Profile</a></p>
-                <p><svg class="icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm3-1a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm-3 4a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg> Pune, Maharashtra, India-411046</p>
+
+            <!-- Contact Info -->
+            <div class="text-sm space-y-2 md:text-right pt-4 md:pt-0">
+                <p class="flex items-center justify-center md:justify-end">
+                    <svg class="w-5 h-5 mr-2 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.956.71l1.25 4.298a1 1 0 01-.54 1.155l-1.745.723a1 1 0 00-.5.868v2.731a1 1 0 00.174.553l.067.098a1 1 0 00.868.5l2.731-.5a1 1 0 00.868.5l.723-1.745a1 1 0 011.155-.54l4.298 1.25a1 1 0 01.71.956V17a1 1 0 01-1 1h-2.153a1 1 0 01-.956-.71l-1.25-4.298a1 1 0 01.54-1.155l1.745-.723a1 1 0 00.5-.868v-2.731a1 1 0 00-.174-.553l-.067-.098a1 1 0 00-.868-.5l-2.731.5a1 1 0 00-.868.5l-.723 1.745a1 1 0 01-1.155.54l-4.298-1.25A1 1 0 013 3z"/></svg>
+                    +91-7264051212
+                </p>
+                <p class="flex items-center justify-center md:justify-end">
+                    <svg class="w-5 h-5 mr-2 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                    <a href="mailto:hrishikeshmalave@gmail.com" class="text-white hover:text-blue-200 transition">hrishikeshmalave@gmail.com</a>
+                </p>
+                <p class="flex items-center justify-center md:justify-end">
+                    <svg class="w-5 h-5 mr-2 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16 4H4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2zm-1.5 6.5a.5.5 0 01-.5.5h-9a.5.5 0 01-.5-.5v-3a.5.5 0 01.5-.5h9a.5.5 0 01.5.5v3z" clip-rule="evenodd"/></svg>
+                    <a href="https://www.linkedin.com/in/hrishikesh-malave-890948169" target="_blank" class="text-white hover:text-blue-200 transition">LinkedIn Profile</a>
+                </p>
+                <p class="flex items-center justify-center md:justify-end">
+                    <svg class="w-5 h-5 mr-2 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm3-1a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm-3 4a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+                    Pune, Maharashtra, India-411046
+                </p>
             </div>
         </div>
+        
         <!-- Dark Mode Toggle Button -->
-        <button id="darkModeToggle" class="dark-mode-toggle">
-            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-            <span>Dark Mode</span>
+        <button id="darkModeToggle" class="absolute top-4 right-4 bg-white bg-opacity-20 text-white rounded-lg px-3 py-2 text-sm font-medium hover:bg-opacity-30 transition flex items-center gap-2">
+            <svg class="w-5 h-5 sun-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="w-5 h-5 moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <span id="darkModeText">Dark Mode</span>
         </button>
     </header>
 
-    <!-- About Me Section -->
-    <section id="about" class="py-16">
-        <div class="container card">
-            <h2 class="section-title">About Me</h2>
-            <p style="font-size: 1.125rem; line-height: 1.75rem; text-align: center;">
-                System Engineer at TCS with 3+ years in managing and automating enterprise systems. 
-                Skilled in AWS, Azure, Docker, Kubernetes, Jenkins, Ansible. Strong in scripting, CI/CD, and infrastructure automation. 
-                Seeking DevOps/Cloud Engineer roles to build scalable and reliable systems.
-            </p>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-<section id="technical-skills">
-    <div class="skills-container">
-        <h2 class="section-title">TECHNICAL SKILLS</h2>
-        <div class="skill-list">
-
-            <div class="skill-pair">
-                <span class="skill-category">Cloud Platforms:</span>
-                <span class="skill-value">AWS, Microsoft Azure, Google Cloud Platform (GCP)</span>
-            </div> <br>
-
-            <div class="skill-pair">
-                <span class="skill-category">Containerization & Orchestration:</span>
-                <span class="skill-value">Docker, Kubernetes</span>
-            </div> <br>
-
-            <div class="skill-pair">
-                <span class="skill-category">CI/CD & Automation:</span>
-                <span class="skill-value">Jenkins, GitHub Actions, Terraform, Ansible</span>
-            </div> <br>
-
-            <div class="skill-pair">
-                <span class="skill-category">Monitoring & Logging:</span>
-                <span class="skill-value">Grafana, Prometheus</span>
-            </div> <br>
-
-            <div class="skill-pair">
-                <span class="skill-category">Infrastructure as Code (IaC):</span>
-                <span class="skill-value">Terraform</span>
-            </div> <br>
- 
-            <div class="skill-pair">
-                <span class="skill-category">Scripting & Programming:</span>
-                <span class="skill-value">Python</span>
-                <span class="skill-value">Shell Scripting</span>
-            </div> <br>
-
-            <div class="skill-pair">
-                <span class="skill-category">Version Control:</span>
-                <span class="skill-value">Git, GitHub</span>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-    <!-- Projects Section -->
-<section id="projects">
-    <div class="container card">
-        <h2 class="section-title">Projects</h2>
-        <div class="project-grid">
-
-            <div class="project-card">
-                <h3>Terraform & Bitbucket CI/CD for Cloud Automation</h3>
-                <ul>
-                    <li>Utilized Terragrunt and Terraform for IaC, reducing deployment time by 40%.</li>
-                    <li>Implemented GitOps with Bitbucket CI/CD, boosting uptime by 20%.</li>
-                </ul>
-                <div class="skill-tags">
-                    <span>Tools: Terraform,</span>
-                    <span>Terragrunt,</span>
-                    <span>Bitbucket CI/CD,</span>
-                    <span>GitOps,</span>
-                    <span>IaC.</span>
+    <main class="py-10">
+        <!-- About Me Section -->
+        <section id="about" class="pb-10">
+            <div class="container mx-auto max-w-7xl px-6">
+                <div class="bg-secondary rounded-xl shadow-lg p-6 md:p-10 transition duration-300">
+                    <h2 class="section-title text-secondary text-4xl font-extrabold text-center mb-10 relative">About Me</h2>
+                    <p class="text-primary text-lg leading-relaxed text-center max-w-4xl mx-auto">
+                        System Engineer at TCS with 3+ years in managing and automating enterprise systems.
+                        Skilled in AWS, Azure, Docker, Kubernetes, Jenkins, Ansible, and Python. Strong in scripting, CI/CD, and infrastructure automation (IaC).
+                        Seeking challenging DevOps/Cloud Engineer roles to build scalable, reliable, and efficient cloud-native systems.
+                    </p>
                 </div>
             </div>
+        </section>
 
-            <div class="project-card">
-                <h3>Kubernetes-Based Multi-Cloud Application Deployment</h3>
-                <ul>
-                    <li>Designed and deployed a high-availability web architecture with dynamic content and Amazon RDS for scalable backend storage</li>
-                    <li>Setting up an Automated CI/CD Pipeline with Azure DevOps.</li>
-                    <li>Deploying a Scalable Kubernetes Cluster on Azure Kubernetes Service (AKS).</li>
-                    <li>VPC and Compute Engine Setup for a Scalable Web Application.</li>
-                    <li>Building a 2-Tier Application using Kubernetes.</li>
-                </ul>
-                <div class="skill-tags">
-                    <span>Tools: Kubernetes,</span>
-                    <span>Azure DevOps,</span>
-                    <span>AKS,</span>
-                    <span>Amazon RDS,</span>
-                    <span>VPC,</span>
-                    <span>Compute Engine,</span>
-                    <span>CI/CD.</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- Work Experience Section -->
-    <section id="work-experience" class="min-h-screen flex items-start justify-center">
-        <div class="container mx-auto max-w-4xl p-6">
-            
-            <h2 class="text-4xl font-extrabold text-gray-900 mb-10 section-title">Work Experience</h2>
-            
-            <div class="space-y-8">
+        <!-- Technical Skills Section -->
+        <section id="technical-skills" class="py-10">
+            <div class="container mx-auto max-w-7xl px-6">
+                <h2 class="section-title text-secondary text-4xl font-extrabold text-center mb-10 relative">TECHNICAL SKILLS</h2>
                 
-                <!-- System Engineer Experience (Content from Code2) -->
-                <div class="experience-item bg-white p-8 rounded-xl shadow-2xl transition duration-300 hover:shadow-3xl border-t-4 border-blue-500">
-                    
-                    <div class="flex justify-between items-center mb-1">
-                        <h3 class="text-2xl font-bold text-gray-900">System Engineer</h3>
-                        <p class="date text-lg font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                <div class="bg-secondary rounded-xl shadow-lg p-6 md:p-10 space-y-6 transition duration-300">
+                    <!-- Skill Categories Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-xl font-bold text-blue-600 dark:text-blue-400">Cloud Platforms:</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">AWS</span>
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Microsoft Azure</span>
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Google Cloud Platform (GCP)</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-xl font-bold text-blue-600 dark:text-blue-400">Containerization & Orchestration:</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Docker</span>
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Kubernetes (AKS)</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-xl font-bold text-blue-600 dark:text-blue-400">CI/CD & Automation:</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Jenkins</span>
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">GitHub Actions</span>
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Ansible</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-xl font-bold text-blue-600 dark:text-blue-400">Infrastructure as Code (IaC):</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Terraform</span>
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Terragrunt</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-xl font-bold text-blue-600 dark:text-blue-400">Scripting & Programming:</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Python</span>
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Shell Scripting</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-xl font-bold text-blue-600 dark:text-blue-400">Monitoring & Version Control:</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Grafana</span>
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Prometheus</span>
+                                <span class="skill-item text-base font-medium rounded-full px-3 py-1">Git/GitHub</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Experience Section -->
+        <section id="work-experience" class="py-10">
+            <div class="container mx-auto max-w-7xl px-6">
+                <h2 class="section-title text-secondary text-4xl font-extrabold text-center mb-10 relative">Work Experience</h2>
+                
+                <div class="bg-secondary rounded-xl shadow-lg p-6 md:p-10 transition duration-300">
+                    <div class="flex justify-between items-start mb-4 flex-wrap">
+                        <div class="order-2 md:order-1">
+                            <h3 class="text-2xl font-bold text-secondary">System Engineer</h3>
+                            <p class="text-xl font-medium text-gray-600 dark:text-gray-400 mb-1">Tata Consultancy Services, Pune</p>
+                        </div>
+                        <p class="text-lg font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full order-1 md:order-2 mb-2 md:mb-0">
                             Oct 2022 – Present
                         </p>
                     </div>
                     
-                    <p class="text-xl font-medium text-gray-600 mb-4">
-                        Tata Consultancy Services, Pune
-                    </p>
-                    
-                    <ul class="list-disc list-outside ml-6 space-y-3 text-gray-700 text-lg">
-                        <li class="pl-2">Implemented, developed, and managed CI/CD pipelines in Azure DevOps for seamless application deployment.</li>
-                        <li class="pl-2">Orchestrated containerized applications using Kubernetes and Docker to support a microservices architecture.</li>
-                        <li class="pl-2">Engineered Terraform-based CI/CD pipelines integrated with Jenkins, cutting deployment time by 50% and enhancing developer productivity.</li>
-                        <li class="pl-2">Maintained a high availability clustered environment of 500+ Linux servers, ensuring 99.9% system uptime and reliability.</li>
-                        <li class="pl-2">Enhanced system performance by achieving a 30% reduction in downtime incidents and optimizing resource utilization using Grafana and VMware.</li>
+                    <ul class="list-disc list-outside ml-6 space-y-3 text-primary text-lg">
+                        <li class="pl-2">Implemented, developed, and managed CI/CD pipelines in Azure DevOps for seamless application deployment, significantly reducing manual intervention.</li>
+                        <li class="pl-2">Orchestrated containerized applications using Kubernetes and Docker to support a robust microservices architecture, ensuring scalability and resource efficiency.</li>
+                        <li class="pl-2">Engineered Terraform-based IaC CI/CD pipelines integrated with Jenkins, cutting deployment time by 50% and enhancing developer productivity.</li>
+                        <li class="pl-2">Maintained a high availability clustered environment of 500+ Linux servers, ensuring 99.9% system uptime and reliability through proactive monitoring and automation.</li>
+                        <li class="pl-2">Enhanced system performance by achieving a 30% reduction in downtime incidents and optimizing resource utilization using Grafana, Prometheus, and VMware tools.</li>
                     </ul>
                 </div>
-    
+            </div>
+        </section>
 
-    <!-- Education Section -->
-    <section id="education">
-        <div class="container card">
-            <h2 class="section-title">Education</h2>
-            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                <div class="education-item">
-                    <h3>B.Tech in Computer Science</h3>
-                    <p>PCET's Nutan College of Engineering and Research</p>
-                    <p class="date">2018 - 2022 | CGPA: 8.88/10</p>
-                </div>
-                <div class="education-item">
-                    <h3>12th (HSC)</h3>
-                    <p>Shivbhumi Jr. College</p>
-                    <p class="date">2022 | Percentage: 67.69%</p>
-                </div>
-                <div class="education-item">
-                    <h3>10th (SSC)</h3>
-                    <p>Shivbhumi Vidyalaya</p>
-                    <p class="date">2020 | Percentage: 84.20%</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Projects Section -->
+        <section id="projects" class="py-10">
+            <div class="container mx-auto max-w-7xl px-6">
+                <h2 class="section-title text-secondary text-4xl font-extrabold text-center mb-10 relative">Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
 
-<section id="certifications">
-    <div class="container card">
-        <h2 class="section-title">Certifications</h2>
-        <div class="certs-grid">
-            <div class="cert-item">
-                <h3>Microsoft Certified: Azure DevOps Engineer</h3>
-            </div>
-            <div class="cert-item">
-                <h3>AWS Certified Cloud Practitioner</h3>
-            </div>
-            <div class="cert-item">
-                <h3>Microsoft Certified: Azure Administrator Associate</h3>
-            </div>
-            <div class="cert-item">
-                <h3>Microsoft Certified: Azure Fundamentals</h3>
-            </div>
-        </div>
-    </div>
-</section>
+                    <!-- Project Card 1 -->
+                    <div class="bg-secondary rounded-xl shadow-xl p-6 hover:shadow-2xl transition duration-300 hover:scale-[1.02]">
+                        <h3 class="text-xl font-bold text-secondary mb-2">Terraform & Bitbucket CI/CD for Cloud Automation</h3>
+                        <p class="text-primary mb-4 text-sm">Infrastructure as Code & GitOps Implementation</p>
+                        <ul class="list-disc list-outside ml-5 space-y-1 text-primary text-base">
+                            <li>Utilized Terragrunt and Terraform for IaC, reducing resource provisioning and deployment time by **40%**.</li>
+                            <li>Implemented GitOps with Bitbucket CI/CD, boosting deployment consistency and ensuring service uptime by **20%**.</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">Terraform</span>
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">Terragrunt</span>
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">Bitbucket CI/CD</span>
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">GitOps</span>
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">IaC</span>
+                        </div>
+                    </div>
 
-    <!-- Extra-curricular & Interests Section -->
-    <section id="extra-interests">
-        <div class="container card">
-            <h2 class="section-title">Extra-curricular & Interests</h2>
-            <div class="grid-layout">
-                <div class="activity-card">
-                    <h3>Personal Interests / Hobbies</h3>
-                    <ul>
+                    <!-- Project Card 2 -->
+                    <div class="bg-secondary rounded-xl shadow-xl p-6 hover:shadow-2xl transition duration-300 hover:scale-[1.02]">
+                        <h3 class="text-xl font-bold text-secondary mb-2">Kubernetes-Based Multi-Cloud Application Deployment</h3>
+                        <p class="text-primary mb-4 text-sm">High-Availability Container Orchestration</p>
+                        <ul class="list-disc list-outside ml-5 space-y-1 text-primary text-base">
+                            <li>Designed and deployed a high-availability web architecture on AWS with dynamic content and Amazon RDS for scalable backend storage.</li>
+                            <li>Set up an automated CI/CD Pipeline using Azure DevOps to deploy applications to an AKS cluster.</li>
+                            <li>Implemented a 2-Tier Application using Kubernetes, configuring VPC and Compute Engine for a scalable GCP deployment.</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">Kubernetes</span>
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">Azure DevOps</span>
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">AKS</span>
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">Amazon RDS</span>
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">VPC/GCP Compute</span>
+                            <span class="project-skill-tag text-xs font-medium rounded-full px-3 py-1">CI/CD</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-10">
+            <div class="container mx-auto max-w-7xl px-6">
+                <h2 class="section-title text-secondary text-4xl font-extrabold text-center mb-10 relative">Education</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- B.Tech -->
+                    <div class="bg-secondary rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                        <h3 class="text-xl font-bold text-secondary mb-1">B.Tech in Computer Science</h3>
+                        <p class="text-primary text-lg mb-1">PCET's Nutan College of Engineering and Research</p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">2018 - 2022 | CGPA: 8.88/10</p>
+                    </div>
+                    <!-- 12th -->
+                    <div class="bg-secondary rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                        <h3 class="text-xl font-bold text-secondary mb-1">12th (HSC)</h3>
+                        <p class="text-primary text-lg mb-1">Shivbhumi Jr. College</p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">2018 | Percentage: 67.69%</p>
+                    </div>
+                    <!-- 10th -->
+                    <div class="bg-secondary rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                        <h3 class="text-xl font-bold text-secondary mb-1">10th (SSC)</h3>
+                        <p class="text-primary text-lg mb-1">Shivbhumi Vidyalaya</p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">2016 | Percentage: 84.20%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-10">
+            <div class="container mx-auto max-w-7xl px-6">
+                <h2 class="section-title text-secondary text-4xl font-extrabold text-center mb-10 relative">Certifications</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Cert 1 -->
+                    <div class="bg-secondary rounded-xl shadow-lg p-4 text-center hover:shadow-xl transition duration-300 hover:scale-[1.02]">
+                        <h3 class="text-lg font-semibold text-secondary mb-1">Microsoft Certified: Azure DevOps Engineer</h3>
+                    </div>
+                    <!-- Cert 2 -->
+                    <div class="bg-secondary rounded-xl shadow-lg p-4 text-center hover:shadow-xl transition duration-300 hover:scale-[1.02]">
+                        <h3 class="text-lg font-semibold text-secondary mb-1">AWS Certified Cloud Practitioner</h3>
+                    </div>
+                    <!-- Cert 3 -->
+                    <div class="bg-secondary rounded-xl shadow-lg p-4 text-center hover:shadow-xl transition duration-300 hover:scale-[1.02]">
+                        <h3 class="text-lg font-semibold text-secondary mb-1">Microsoft Certified: Azure Administrator Associate</h3>
+                    </div>
+                    <!-- Cert 4 -->
+                    <div class="bg-secondary rounded-xl shadow-lg p-4 text-center hover:shadow-xl transition duration-300 hover:scale-[1.02]">
+                        <h3 class="text-lg font-semibold text-secondary mb-1">Microsoft Certified: Azure Fundamentals</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Extra-curricular & Interests Section -->
+        <section id="extra-interests" class="py-10">
+            <div class="container mx-auto max-w-7xl px-6">
+                <h2 class="section-title text-secondary text-4xl font-extrabold text-center mb-10 relative">Extra-curricular & Interests</h2>
+                <div class="bg-secondary rounded-xl shadow-lg p-6 md:p-10 transition duration-300">
+                    <h3 class="text-2xl font-bold text-secondary mb-4">Personal Interests / Hobbies</h3>
+                    <ul class="list-disc list-outside ml-6 space-y-1 text-primary text-lg">
                         <li>Playing Cricket</li>
+                        <li>Reading tech blogs and open-source contributions</li>
                     </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Hrishikesh Prasad Malave. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.875rem;">Designed with ❤️ using HTML5 & CSS</p>
+    <footer class="bg-gray-800 text-white p-6 text-center transition duration-300">
+        <div class="container mx-auto max-w-7xl">
+            <p class="text-sm">&copy; 2025 Hrishikesh Prasad Malave. All rights reserved.</p>
+            <p class="text-xs mt-1 opacity-70">Built with Code, Coffee, and DevOps principles.</p>
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const darkModeToggle = document.getElementById('darkModeToggle');
-            const body = document.body;
-            const sunIcon = document.querySelector('.sun-icon');
-            const moonIcon = document.querySelector('.moon-icon');
+    <!-- Firebase/Firestore and Dark Mode Logic -->
+    <script type="module">
+        // Firebase modules imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot, getDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-            // Check for saved dark mode preference
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
+        // Set log level to debug for better console output
+        setLogLevel('Debug');
+
+        // Global Firebase variables provided by the Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth;
+        let userId = null;
+        let isAuthReady = false;
+
+        const body = document.body;
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        const darkModeText = document.getElementById('darkModeText');
+
+        // --- Utility Functions ---
+
+        function applyTheme(isDark) {
+            if (isDark) {
                 body.classList.add('dark-mode');
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
-                darkModeToggle.querySelector('span').textContent = 'Light Mode';
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                darkModeText.textContent = 'Light Mode';
             } else {
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'block';
-                darkModeToggle.querySelector('span').textContent = 'Dark Mode';
+                body.classList.remove('dark-mode');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                darkModeText.textContent = 'Dark Mode';
             }
+        }
 
-            // Toggle dark mode on button click
-            darkModeToggle.addEventListener('click', () => {
-                body.classList.toggle('dark-mode');
-                if (body.classList.contains('dark-mode')) {
-                    localStorage.setItem('theme', 'dark');
-                    sunIcon.style.display = 'block';
-                    moonIcon.style.display = 'none';
-                    darkModeToggle.querySelector('span').textContent = 'Light Mode';
-                } else {
-                    localStorage.setItem('theme', 'light');
-                    sunIcon.style.display = 'none';
-                    moonIcon.style.display = 'block';
-                    darkModeToggle.querySelector('span').textContent = 'Dark Mode';
+        // --- Firebase Initialization and Auth ---
+
+        async function initFirebase() {
+            try {
+                if (Object.keys(firebaseConfig).length === 0) {
+                    console.error("Firebase configuration is missing or empty.");
+                    // Fallback to local system preference if Firebase is not configured
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    applyTheme(prefersDark);
+                    return;
                 }
+
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Sign in using the custom token or anonymously
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                // Listen for Auth state changes
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        isAuthReady = true;
+                        console.log("Firebase Auth Ready. User ID:", userId);
+                        // Once authenticated, start listening for the user's settings
+                        listenForDarkModePreference();
+                    } else {
+                        // User is signed out. Fallback to anonymous ID if needed.
+                        userId = crypto.randomUUID(); 
+                        isAuthReady = true;
+                        console.log("Signed in anonymously. Using generated User ID:", userId);
+                        // Listen for settings even for anonymous user (private path)
+                        listenForDarkModePreference(); 
+                    }
+                });
+
+            } catch (error) {
+                console.error("Firebase initialization or authentication failed:", error);
+                // In case of failure, default to light mode
+                applyTheme(false);
+            }
+        }
+
+        // --- Firestore Operations ---
+
+        function getDarkModeDocRef() {
+            if (!userId) {
+                console.error("Attempted to get doc ref before user ID is set.");
+                return null;
+            }
+            // Private data path for user settings
+            const path = `/artifacts/${appId}/users/${userId}/settings/darkMode`;
+            return doc(db, path);
+        }
+
+        function listenForDarkModePreference() {
+            const docRef = getDarkModeDocRef();
+            if (!docRef) return;
+
+            // Use onSnapshot for real-time updates
+            onSnapshot(docRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    const isDark = data.enabled || false;
+                    console.log("Firestore updated theme:", isDark ? "Dark" : "Light");
+                    applyTheme(isDark);
+                } else {
+                    // Document doesn't exist, check system preference and initialize
+                    console.log("No saved theme preference found. Checking system preference.");
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    applyTheme(prefersDark);
+                    // Optionally set initial preference in Firestore
+                    // saveDarkModePreference(prefersDark); 
+                }
+            }, (error) => {
+                console.error("Error listening to dark mode preference:", error);
             });
+        }
+
+        async function saveDarkModePreference(isDark) {
+            if (!isAuthReady || !db) {
+                console.warn("Attempted to save preference before Firebase is ready.");
+                return;
+            }
+            const docRef = getDarkModeDocRef();
+            if (!docRef) return;
+            try {
+                // Set/overwrite the document
+                await setDoc(docRef, { enabled: isDark });
+                console.log("Dark mode preference saved to Firestore:", isDark);
+            } catch (error) {
+                console.error("Error saving dark mode preference:", error);
+            }
+        }
+
+        // --- Event Listener ---
+
+        darkModeToggle.addEventListener('click', () => {
+            // Determine the new state based on the *current* class list
+            const newIsDark = !body.classList.contains('dark-mode');
+            // Optimistically apply the change for instant feedback
+            applyTheme(newIsDark);
+            // Persist the change to Firestore
+            saveDarkModePreference(newIsDark);
         });
+
+        // Initialize Firebase on DOM content loaded
+        document.addEventListener('DOMContentLoaded', initFirebase);
+        
     </script>
 
 </body>
